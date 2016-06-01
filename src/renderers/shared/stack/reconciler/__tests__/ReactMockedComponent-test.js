@@ -17,7 +17,9 @@ var ReactTestUtils;
 var AutoMockedComponent;
 var MockedComponent;
 
-describe('ReactMockedComponent', function() {
+var AutoMockedPureFunctionComponent;
+
+describe('ReactMockedComponent', function() { 
 
   beforeEach(function() {
     React = require('React');
@@ -26,7 +28,15 @@ describe('ReactMockedComponent', function() {
     AutoMockedComponent = jest.genMockFromModule('ReactMockedComponentTestComponent');
     MockedComponent = jest.genMockFromModule('ReactMockedComponentTestComponent');
 
+    AutoMockedPureFunctionComponent = jest.fn();
+
     ReactTestUtils.mockComponent(MockedComponent);
+  });
+
+  it('should allow an mock function to be rendered without warnings', () => {
+    spyOn(console, 'error');
+    ReactTestUtils.renderIntoDocument(<AutoMockedPureFunctionComponent />);
+    expect(console.error.calls.count()).toBe(0);
   });
 
   it('should allow an implicitly mocked component to be rendered without warnings', () => {
