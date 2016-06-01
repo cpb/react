@@ -28,7 +28,7 @@ describe('ReactMockedComponent', function() {
     AutoMockedComponent = jest.genMockFromModule('ReactMockedComponentTestComponent');
     MockedComponent = jest.genMockFromModule('ReactMockedComponentTestComponent');
 
-    AutoMockedPureFunctionComponent = jest.fn();
+    AutoMockedPureFunctionComponent = jest.fn( () => <span />);
 
     ReactTestUtils.mockComponent(MockedComponent);
   });
